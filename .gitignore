@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/intellij
 
 ### Intellij ###
@@ -68,3 +67,11 @@ fabric.properties
 
 
 # End of https://www.gitignore.io/api/intellij
+
+
+# intellij
+.idea/
+.gradle/
+gradle/
+gradlew
+gradlew.bat
