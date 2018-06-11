@@ -2,38 +2,38 @@ package calculator;
 
 import calculator.util.Pair;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Tokenizer {
-    private static final Map<String, String> tokenMap = generateTokenMap();
-    private static Map<String, String> generateTokenMap() {
-        Map<String, String> map = new HashMap<>();
-        map.put("WHITE_SPACE", "[ \n\t]+");
-        map.put("NUMBER", "[0-9]*.[0-9]+");
-        map.put("PI", "PI");
-        map.put("E", "E");
-        map.put("LEFT_PARENTHESES", "(");
-        map.put("RIGHT_PARENTHESES", ")");
-        map.put("COMMA", ",");
-        map.put("ADDITION", "+");
-        map.put("SUBSTRACTION", "-");
-        map.put("MULTIPLICATION", "*");
-        map.put("DIVISION", "/");
-        map.put("ASIN", "asin");
-        map.put("ACOS", "acos");
-        map.put("ATAN", "atan");
-        map.put("SIN", "sin");
-        map.put("COS", "cos");
-        map.put("TAN", "tan");
-        map.put("SINH", "sinh");
-        map.put("COSH", "cosh");
-        map.put("TANH", "tanh");
-        map.put("POW", "pow");
-        map.put("LOG", "log");
-        return map;
+    private static final List<Pair<String, String>> tokenList = generateTokenList();
+    private static List<Pair<String, String>> generateTokenList() {
+        List<Pair<String, String>> list = new ArrayList<>();
+        list.add(new Pair<>("WHITE_SPACE", "\\s+"));
+        list.add(new Pair<>("NUMBER", "\\d+\\.\\d+|\\d+\\.|\\.\\d+|\\d+"));
+        list.add(new Pair<>("PI", "PI"));
+        list.add(new Pair<>("E", "E"));
+        list.add(new Pair<>("LEFT_PARENTHESES", "\\("));
+        list.add(new Pair<>("RIGHT_PARENTHESES", "\\)"));
+        list.add(new Pair<>("COMMA", ","));
+        list.add(new Pair<>("ADDITION", "\\+"));
+        list.add(new Pair<>("SUBSTRACTION", "-"));
+        list.add(new Pair<>("MULTIPLICATION", "\\*"));
+        list.add(new Pair<>("DIVISION", "/"));
+        list.add(new Pair<>("ASIN", "asin"));
+        list.add(new Pair<>("ACOS", "acos"));
+        list.add(new Pair<>("ATAN", "atan"));
+        list.add(new Pair<>("SINH", "sinh"));
+        list.add(new Pair<>("COSH", "cosh"));
+        list.add(new Pair<>("TANH", "tanh"));
+        list.add(new Pair<>("SIN", "sin"));
+        list.add(new Pair<>("COS", "cos"));
+        list.add(new Pair<>("TAN", "tan"));
+        list.add(new Pair<>("POW", "pow"));
+        list.add(new Pair<>("LOG", "log"));
+        return list;
     }
 
     private Integer position;
@@ -49,9 +49,9 @@ public class Tokenizer {
             return new Pair<>("EOF", "");
 
         Pair<String, String> result = null;
-        for (Map.Entry<String, String> entry: tokenMap.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
+        for (Pair<String, String> pair: tokenList) {
+            String key = pair.getKey();
+            String value = pair.getValue();
 
             Pattern pattern = Pattern.compile(value);
             Matcher matcher = pattern.matcher(expression);
