@@ -61,14 +61,10 @@ public class Tokenizer {
             // use check function to distinguish Token, i.e.
             //   Token.POSITIVE and Token.ADDITION
             //   Token.NEGATIVE and Token.SUBSTRACTION
-            if (key.equals(Token.POSITIVE) && !isPositive())
-                continue;
-            if (key.equals(Token.NEGATIVE) && !isNegative())
-                continue;
-            if (key.equals(Token.ADDITION) && !isAddition())
-                continue;
-            if (key.equals(Token.SUBSTRACTION) && !isSubstraction())
-                continue;
+            if (key.equals(Token.POSITIVE) && !isPositive()) continue;
+            if (key.equals(Token.NEGATIVE) && !isNegative()) continue;
+            if (key.equals(Token.ADDITION) && !isAddition()) continue;
+            if (key.equals(Token.SUBSTRACTION) && !isSubstraction()) continue;
 
             Pattern pattern = Pattern.compile(value);
             Matcher matcher = pattern.matcher(expression);
