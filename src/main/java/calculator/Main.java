@@ -1,4 +1,4 @@
 package calculator;
 
-public class Viewer {
+public class Main {
 }

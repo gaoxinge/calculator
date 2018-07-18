@@ -4,6 +4,8 @@ public class Pair<K, V> {
     private K key;
     private V value;
 
+    public Pair() {}
+
     public Pair(K key, V value) {
         this.key = key;
         this.value = value;
@@ -17,6 +19,6 @@ public class Pair<K, V> {
 
     @Override
     public String toString() {
-        return String.format("Pair( key = %s, value = %s)", key, value);
+        return String.format("Pair( key = %s, value = %s )", key, value);
     }
 }
