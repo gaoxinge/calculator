@@ -51,6 +51,9 @@ A java implementation of calculator based on [shunting-yard algorithm](https://e
 
 ## TODO
 
+- more rigorous args check for function
+- unit test
+
 ## reference
 
 - [shunting-yard algorithm](https://github.com/gaoxinge/calculator/issues/2)
