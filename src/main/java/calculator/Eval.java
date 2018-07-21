@@ -1,4 +1,4 @@
 package calculator;
 
-public class Main {
+public class Eval {
 }

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Parser {
+public class ParseLayer {
     private Stack<Double> operand;
     private Stack<Triple<Token, String, Integer>> operator;
     private String expression;
     private Inter inter;
 
-    public Parser(String expression) {
+    public ParseLayer(String expression) {
         this.operand = new Stack<>();
         this.operator = new Stack<>();
         this.expression = expression;

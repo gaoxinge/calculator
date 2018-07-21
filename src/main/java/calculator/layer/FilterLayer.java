@@ -10,9 +10,9 @@ public class FilterLayer {
         this.deduceLayer = deduceLayer;
     }
 
-    public Quadruple<Type, String, Integer, String> getNextToken() throws Exception {
-        Quadruple<Type, String, Integer, String> quadruple = deduceLayer.getNextToken();
-        while (quadruple.getKey1().equals(Type.SPACE)) {
+    public Quadruple<Type, String, String, Integer> getNextToken() throws Exception {
+        Quadruple<Type, String, String, Integer> quadruple = deduceLayer.getNextToken();
+        while (quadruple.getT1().equals(Type.SPACE)) {
             quadruple = deduceLayer.getNextToken();
         }
         return quadruple;

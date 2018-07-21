@@ -1,19 +1,19 @@
 package calculator.layer;
 
 import calculator.common.Type;
-import calculator.common.VarRegex;
-import calculator.util.ErrorUtil;
+import calculator.common.TypeVarRegex;
+import calculator.util.Error;
 import calculator.util.Pair;
 import calculator.util.Triple;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Tokenizer {
+public class TokenLayer {
     private Integer position;
     private String expression;
 
-    public Tokenizer(String expression) {
+    public TokenLayer(String expression) {
         this.position = 0;
         this.expression = expression;
     }
@@ -22,26 +22,26 @@ public class Tokenizer {
         if (position >= expression.length())
             return new Triple<>(Type.EOF, "", position);
 
-        Triple<Type, String, Integer> result = null;
-        for (Pair<Type, String> varRegex: VarRegex.VAR_REGEX_LIST) {
-            Type key = varRegex.getKey();
-            String value = varRegex.getValue();
+        Triple<Type, String, Integer> triple = null;
+        for (Pair<Type, String> typeVarRegex: TypeVarRegex.TYPE_VAR_REGEX_LIST) {
+            Type type = typeVarRegex.getT1();
+            String varRegex = typeVarRegex.getT2();
 
-            Pattern pattern = Pattern.compile(value);
+            Pattern pattern = Pattern.compile(varRegex);
             Matcher matcher = pattern.matcher(expression);
 
             if (matcher.find(position) && matcher.start() == position) {
-                result = new Triple<>(key, matcher.group(), position);
+                triple = new Triple<>(type, matcher.group(), position);
                 position = matcher.end();
                 break;
             }
         }
 
-        if (result == null) {
+        if (triple == null) {
             String error = String.format("Illegal character at position %s.", position);
-            throw new Exception(ErrorUtil.wrap(error, expression, position));
+            throw new Exception(Error.wrap(error, expression, position));
         }
 
-        return result;
+        return triple;
     }
 }

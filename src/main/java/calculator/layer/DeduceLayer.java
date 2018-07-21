@@ -6,19 +6,19 @@ import calculator.util.Triple;
 
 public class DeduceLayer {
     private Triple<Type, String, Integer> last;
-    private Tokenizer tokenizer;
+    private TokenLayer tokenLayer;
 
-    public DeduceLayer(Tokenizer tokenizer) {
+    public DeduceLayer(TokenLayer tokenLayer) {
         this.last = null;
-        this.tokenizer = tokenizer;
+        this.tokenLayer = tokenLayer;
     }
 
-    public Quadruple<Type, String, Integer, String> getNextToken() throws Exception {
-        Triple<Type, String, Integer> triple = tokenizer.getNextToken();
+    public Quadruple<Type, String, String, Integer> getNextToken() throws Exception {
+        Triple<Type, String, Integer> triple = tokenLayer.getNextToken();
 
-        if (!triple.getKey1().equals(Type.SPACE)) last = triple;
+        if (!triple.getT1().equals(Type.SPACE)) last = triple;
 
-        switch (triple.getKey2()) {
+        switch (triple.getT2()) {
             case "+":
                 if (isAdd()) return getAdd(triple);
                 else         return getPos(triple);
@@ -34,35 +34,35 @@ public class DeduceLayer {
         if (last == null)
             return false;
 
-        Type type = last.getKey1();
+        Type type = last.getT1();
         return type.equals(Type.NUM) || type.equals(Type.RIGHT);
     }
 
-    private Quadruple<Type, String, Integer, String> getAdd(Triple<Type, String, Integer> triple) {
-        return new Quadruple<>(triple.getKey1(), triple.getKey2(), triple.getKey3(), "binary");
+    private Quadruple<Type, String, String, Integer> getAdd(Triple<Type, String, Integer> triple) {
+        return new Quadruple<>(triple.getT1(), triple.getT2(), "binary", triple.getT3());
     }
 
-    private Quadruple<Type, String, Integer, String> getPos(Triple<Type, String, Integer> triple) {
-        return new Quadruple<>(triple.getKey1(), triple.getKey2(), triple.getKey3(), "unary");
+    private Quadruple<Type, String, String, Integer> getPos(Triple<Type, String, Integer> triple) {
+        return new Quadruple<>(triple.getT1(), triple.getT2(), "unary", triple.getT3());
     }
 
     private Boolean isSub() {
         if (last == null)
             return false;
 
-        Type type = last.getKey1();
+        Type type = last.getT1();
         return type.equals(Type.NUM) || type.equals(Type.RIGHT);
     }
 
-    private Quadruple<Type, String, Integer, String> getSub(Triple<Type, String, Integer> triple) {
-        return new Quadruple<>(triple.getKey1(), triple.getKey2(), triple.getKey3(), "binary");
+    private Quadruple<Type, String, String, Integer> getSub(Triple<Type, String, Integer> triple) {
+        return new Quadruple<>(triple.getT1(), triple.getT2(), "binary", triple.getT3());
     }
 
-    private Quadruple<Type, String, Integer, String> getNeg(Triple<Type, String, Integer> triple) {
-        return new Quadruple<>(triple.getKey1(), triple.getKey2(), triple.getKey3(), "unary");
+    private Quadruple<Type, String, String, Integer> getNeg(Triple<Type, String, Integer> triple) {
+        return new Quadruple<>(triple.getT1(), triple.getT2(), "unary", triple.getT3());
     }
 
-    private Quadruple<Type, String, Integer, String> getDefault(Triple<Type, String, Integer> triple) {
-        return new Quadruple<>(triple.getKey1(), triple.getKey2(), triple.getKey3(), "");
+    private Quadruple<Type, String, String, Integer> getDefault(Triple<Type, String, Integer> triple) {
+        return new Quadruple<>(triple.getT1(), triple.getT2(), "", triple.getT3());
     }
 }

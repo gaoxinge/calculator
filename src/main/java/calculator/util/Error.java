@@ -1,7 +1,6 @@
 package calculator.util;
 
-public class ErrorUtil {
-
+public class Error {
     public static String wrap(String error, String expr, Integer pos) {
         StringBuilder sb = new StringBuilder();
         sb.append(expr);

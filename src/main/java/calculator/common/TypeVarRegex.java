@@ -5,9 +5,9 @@ import calculator.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VarRegex {
-    public static final List<Pair<Type, String>> VAR_REGEX_LIST = generateVarRegexList();
-    private static List<Pair<Type, String>> generateVarRegexList() {
+public class TypeVarRegex {
+    public static final List<Pair<Type, String>> TYPE_VAR_REGEX_LIST = generateTypeVarRegexList();
+    private static List<Pair<Type, String>> generateTypeVarRegexList() {
         List<Pair<Type, String>> list = new ArrayList<>();
         list.add(new Pair<>(Type.SPACE, "\\s+"));
         list.add(new Pair<>(Type.NUM, "\\d+\\.\\d+|\\d+\\.|\\.\\d+|\\d+"));

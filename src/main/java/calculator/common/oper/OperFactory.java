@@ -3,7 +3,6 @@ package calculator.common.oper;
 import calculator.common.func.Func;
 import calculator.common.func.funcs.*;
 import calculator.util.Quintuple;
-import calculator.util.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,31 +21,21 @@ public class OperFactory {
         return list;
     }
 
-    public static Oper build(String var, String num) {
-        final Triple<Integer, String, Func> triple = new Triple<>();
+    private static final Quintuple<String, String, String, String, Func> EMPTY_QUINTUPLE = new Quintuple<>();
+    public static Oper build(String var, String addition) {
         Integer precedence = null;
-        Quintuple<String, String, String, String, Func> quintuple = new Quintuple<>();
+        Quintuple<String, String, String, String, Func> quintuple = EMPTY_QUINTUPLE;
 
         for (Integer index = 0; index < OPER_LIST.size(); index++) {
             quintuple = OPER_LIST.get(index);
 
-            if (quintuple.getKey3().equals("-"))
+            if (quintuple.getT3().equals("-"))
                 precedence = index;
 
-            if (var.equals(quintuple.getKey1()) && num.equals(quintuple.getKey2()))
+            if (var.equals(quintuple.getT1()) && addition.equals(quintuple.getT2()))
                 break;
         }
 
-        triple.setKey1(precedence);
-        triple.setKey2(quintuple.getKey4());
-        triple.setKey3(quintuple.getKey5());
-
-        return new Oper() {
-            @Override public String getVar() { return var; }
-            @Override public String getNum() { return num; }
-            @Override public Integer getPrecedence() { return triple.getKey1(); }
-            @Override public String getAssociative() { return triple.getKey2(); }
-            @Override public Func getValue() { return triple.getKey3(); }
-        };
+        return new Oper(var, addition, precedence, quintuple.getT4(), quintuple.getT5());
     }
 }
