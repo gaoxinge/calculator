@@ -10,17 +10,6 @@ A java implementation of calculator based on [shunting-yard algorithm](https://e
 ```
 > gradle build
 > java -jar ./build/libs/calculator.jar
-3.0
--2.0
-1.0
-6.9999488
-0.9999744
-0.664110443095497
-0.8414709848078965
-1.0
-1.0
-2.0
-8.8462669791059E13
 ```
 
 ## function
