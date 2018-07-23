@@ -23,6 +23,8 @@ public class OperFactory {
 
     private static final Quintuple<String, String, String, String, Func> EMPTY_QUINTUPLE = new Quintuple<>();
     public static Oper build(String var, String addition) {
+        if (addition.equals("")) addition = "binary";
+
         Integer precedence = null;
         Quintuple<String, String, String, String, Func> quintuple = EMPTY_QUINTUPLE;
 

@@ -15,19 +15,23 @@ public class DeduceLayer {
 
     public Quadruple<Type, String, String, Integer> getNextToken() throws Exception {
         Triple<Type, String, Integer> triple = tokenLayer.getNextToken();
-
-        if (!triple.getT1().equals(Type.SPACE)) last = triple;
+        Quadruple<Type, String, String, Integer> quadruple;
 
         switch (triple.getT2()) {
             case "+":
-                if (isAdd()) return getAdd(triple);
-                else         return getPos(triple);
+                if (isAdd()) quadruple = getAdd(triple);
+                else         quadruple = getPos(triple);
+                break;
             case "-":
-                if (isSub()) return getSub(triple);
-                else         return getNeg(triple);
+                if (isSub()) quadruple = getSub(triple);
+                else         quadruple = getNeg(triple);
+                break;
             default:
-                return getDefault(triple);
+                quadruple = getDefault(triple);
         }
+
+        if (!triple.getT1().equals(Type.SPACE)) last = triple;
+        return quadruple;
     }
 
     private Boolean isAdd() {

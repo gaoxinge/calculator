@@ -2,7 +2,6 @@ package calculator.layer;
 
 import calculator.common.Type;
 import calculator.common.TypeVarRegex;
-import calculator.util.Error;
 import calculator.util.Pair;
 import calculator.util.Triple;
 
@@ -37,10 +36,8 @@ public class TokenLayer {
             }
         }
 
-        if (triple == null) {
-            String error = String.format("Illegal character at position %s.", position);
-            throw new Exception(Error.wrap(error, expression, position));
-        }
+        if (triple == null)
+            throw new Exception(String.format("Illegal character at position %s.", position));
 
         return triple;
     }
