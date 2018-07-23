@@ -130,7 +130,6 @@ public class ParseLayer {
                     operand.push(func.func());
                 else
                     throw new Exception(String.format("Invalid args number of function at position %s.", position));
-
             } else {
                 if (operand.size() < g)
                     throw new Exception(String.format("Invalid args number of function at position %s.", position));
